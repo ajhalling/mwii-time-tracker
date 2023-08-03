@@ -27,24 +27,9 @@ def load_data(data_file: str) -> pd.DataFrame:
     DATA_PATH = PATH.joinpath("data").resolve()
     return pd.read_csv(DATA_PATH.joinpath(data_file))
 
-
-def save_data(df: pd.DataFrame, data_file: str) -> None:
-    '''
-    Save DataFrame to /data directory as CSV
-    '''
-    PATH = pathlib.Path(__file__).parent
-    DATA_PATH = PATH.joinpath("data").resolve()
-    df.to_csv(DATA_PATH.joinpath(data_file), index=False)
-
-
-# Function to add a new row to the DataFrame
-from datetime import date, timedelta
-
-# Function to add a new row to the DataFrame
 def add_new_row(df):
     # Get today's date
     today = date.today().strftime('%Y-%m-%d')
-    print(today)
 
     # Check if the max 'date' in the DataFrame is equal to today
     if df['date'].max() == today:
@@ -78,13 +63,13 @@ def add_new_row(df):
     return df
 
 # Read CSV with existing data
-df = load_data('playtime.csv')
+df = pd.read_csv('playtime.csv')
 
 # Add a new row to the DataFrame
 df = add_new_row(df)
 
 # Save CSV
-save_data(df, 'playtime.csv')
+df.to_csv('playtime.csv', index=False)
 
 # Define the layout of the app
 app.layout = html.Div([
@@ -94,10 +79,10 @@ app.layout = html.Div([
         columns=[{'name': col, 'id': col} for col in df.columns],
         data=df.to_dict('records'),
     ),
-    # Interval component to update the data every 2 minutes
+    # Interval component to update the data every 12 hours
     dcc.Interval(
         id='update-interval',
-        interval=1 * 60 * 1000,  # 2 minutes in milliseconds
+        interval=12 * 60 * 60 * 1000,  # 12 hours in milliseconds
         n_intervals=0
     )
 ])
@@ -108,7 +93,7 @@ app.layout = html.Div([
 )
 def update_data_table(n):
     # Read CSV with existing data
-    df = load_data('playtime.csv')
+    df = pd.read_csv('playtime.csv')
 
     # Add a new row to the DataFrame
     df = add_new_row(df)
