@@ -1,8 +1,11 @@
-from steam.webapi import WebAPI
-import pandas as pd
+import os
 from datetime import date
 
-API_KEY = '757E46884546DBD5C0B5FF849A3842A4'
+import git
+import pandas as pd
+from steam.webapi import WebAPI
+
+API_KEY = os.environ['API_KEY']
 
 api = WebAPI(API_KEY, raw=False, format='json', https=True, http_timeout=10)
 
@@ -50,3 +53,11 @@ df['difference'].fillna(0, inplace=True)
 df.to_csv('dash\data\data.csv', index=False)
 
 print(df)
+
+# Commit and push changes to GitHub repository
+repo = git.Repo(r'C:\Code\ajhalling\mwii-time-tracker')
+repo.git.add('dash/data/data.csv')
+repo.index.commit('Update data.csv from HTPC')
+repo.remotes.origin.push()
+
+print('pushed!')
