@@ -55,7 +55,7 @@ df.to_csv('dash\data\data.csv', index=False)
 print(df)
 
 # Commit and push changes to GitHub repository
-repo = git.Repo(r'C:\Code\ajhalling\mwii-time-tracker\mwii-time-tracker')
+repo = git.Repo(r'C:\Code\ajhalling\mwii-time-tracker')
 repo.git.add('dash/data/data.csv')
 repo.index.commit('Update data.csv')
 repo.remotes.origin.push()
