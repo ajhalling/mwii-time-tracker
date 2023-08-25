@@ -43,6 +43,9 @@ df = pd.read_csv('dash\data\data.csv')
 # Add a new row to the DataFrame
 df = add_new_rows(df, ids)
 
+# Sort the data by 'id' and 'date'
+df.sort_values(['id', 'date'], inplace=True)
+
 # Calculate the difference between the previous bar with the same ID
 df['difference'] = df.groupby('id')['playtime_total'].diff()
 
