@@ -12,5 +12,8 @@ git add -A
 REM Commit the changes with a message
 git commit -m "Update: %date% from HTPC"
 
-REM Push the changes to the remote repository using the PAT from environment variable
-git push origin master -c http.extraheader="Authorization: Bearer %GITHUB_PAT%"
+REM Set the HTTP header with the GITHUB_PAT environment variable
+set "GIT_HTTP_HEADER=Authorization: Bearer %GITHUB_PAT%"
+
+REM Push the changes to the remote repository
+git push origin master
