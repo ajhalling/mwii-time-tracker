@@ -1,0 +1,6 @@
+dash_bootstrap_components
+pandas
+plotly.express
+dash_bootstrap_templates
+steam
+dash
