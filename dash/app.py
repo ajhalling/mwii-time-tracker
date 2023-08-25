@@ -82,7 +82,11 @@ app.layout = html.Div([
         ],
         className="jumbotron"
     ),
-    dcc.Graph(figure=fig, config={'displayModeBar': False}),
+    html.Br(),
+    html.Div(
+        dcc.Graph(figure=fig, config={'displayModeBar': False}),
+        style={'border-radius': '10px', 'overflow': 'hidden', 'box-shadow': '0 0 10px rgba(0, 0, 0, 0.1)'}
+    )
 ], className="container")
 
 
