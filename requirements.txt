@@ -4,3 +4,4 @@ plotly.express
 dash_bootstrap_templates
 steam
 dash
+gunicorn
