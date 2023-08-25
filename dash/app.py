@@ -11,6 +11,7 @@ from dash import Input, Output, dcc, html
 
 # Initialize the Dash app
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.SUPERHERO])
+server = app.server
 
 load_figure_template("SUPERHERO")
 
