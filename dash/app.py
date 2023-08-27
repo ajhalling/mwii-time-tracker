@@ -4,7 +4,6 @@ import dash_bootstrap_components as dbc
 import pandas as pd
 import plotly.express as px
 from dash_bootstrap_templates import load_figure_template
-from steam.webapi import WebAPI
 
 import dash
 from dash import Input, Output, dcc, html
