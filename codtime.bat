@@ -14,7 +14,7 @@ REM Add all changes (including the updated .csv file)
 echo Adding changes to Git...
 git add -A
 
-REM Commit the changes with a message
+REM Commit the changes with a message.
 echo Committing changes...
 git commit -m "Update: %date% from HTPC"
 
