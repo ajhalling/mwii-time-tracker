@@ -1,7 +1,6 @@
 import os
 from datetime import date
 
-import git
 import pandas as pd
 from steam.webapi import WebAPI
 
@@ -38,7 +37,7 @@ def add_new_rows(df, ids):
     return df
 
 # Read CSV with existing data
-df = pd.read_csv(r'C:\Code\ajhalling\mwii-time-tracker\dash\data\data.csv')
+df = pd.read_csv('dash/data/data.csv')
 
 # Add a new row to the DataFrame
 df = add_new_rows(df, ids)
@@ -53,4 +52,4 @@ df['difference'] = df.groupby('id')['playtime_total'].diff()
 df['difference'].fillna(0, inplace=True)
 
 # Save CSV
-df.to_csv(r'C:\Code\ajhalling\mwii-time-tracker\dash\data\data.csv', index=False)
+df.to_csv('dash/data/data.csv', index=False)
