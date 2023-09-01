@@ -1,7 +1,6 @@
 import os
 from datetime import date
 
-import git
 import pandas as pd
 from steam.webapi import WebAPI
 
@@ -38,10 +37,13 @@ def add_new_rows(df, ids):
     return df
 
 # Read CSV with existing data
-df = pd.read_csv('dash\data\data.csv')
+df = pd.read_csv('dash/data/data.csv')
 
 # Add a new row to the DataFrame
 df = add_new_rows(df, ids)
+
+# Sort the data by 'id' and 'date'
+df.sort_values(['id', 'date'], inplace=True)
 
 # Calculate the difference between the previous bar with the same ID
 df['difference'] = df.groupby('id')['playtime_total'].diff()
@@ -50,14 +52,4 @@ df['difference'] = df.groupby('id')['playtime_total'].diff()
 df['difference'].fillna(0, inplace=True)
 
 # Save CSV
-df.to_csv('dash\data\data.csv', index=False)
-
-print(df)
-
-# Commit and push changes to GitHub repository
-repo = git.Repo(r'C:\Code\ajhalling\mwii-time-tracker\mwii-time-tracker')
-repo.git.add('dash/data/data.csv')
-repo.index.commit('Update data.csv')
-repo.remotes.origin.push()
-
-print('pushed!')
+df.to_csv('dash/data/data.csv', index=False)
